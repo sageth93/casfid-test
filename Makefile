@@ -12,6 +12,9 @@ php:
 composer-install:
 	docker container exec -it ${DOCKER_CONTAINER_NAME} composer install
 
+migrations:
+	docker container exec -it ${DOCKER_CONTAINER_NAME} php bin/console doctrine:migrations:migrate --no-interaction
+
 exec:
 	docker container exec -it $(DOCKER_CONTAINER_NAME) $(filter-out $@,$(MAKECMDGOALS))
 
