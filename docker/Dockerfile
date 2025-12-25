@@ -43,6 +43,6 @@ RUN apt-get update && apt-get install -y symfony-cli
 
 COPY ../docker/php.ini /etc/php/8.4/fpm/php.ini
 
-WORKDIR /var/www/casfid-technical-test
+WORKDIR /var/www
 
 CMD /etc/init.d/php8.4-fpm start && nginx -g "daemon off;"
