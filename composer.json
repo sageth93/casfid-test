@@ -7,14 +7,15 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "league/tactician-bundle": "^1.6",
         "symfony/console": "7.3.*",
         "symfony/dotenv": "7.3.*",
         "symfony/flex": "^2",
         "symfony/framework-bundle": "7.3.*",
         "symfony/runtime": "7.3.*",
-        "symfony/yaml": "7.3.*"
-    },
-    "require-dev": {
+        "symfony/uid": "7.3.*",
+        "symfony/yaml": "7.3.*",
+        "thecodingmachine/safe": "^3.3"
     },
     "config": {
         "allow-plugins": {
