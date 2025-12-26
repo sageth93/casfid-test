@@ -11,5 +11,6 @@ tactician:
 # Locking middleware - http://tactician.thephpleague.com/plugins/locking-middleware/
 #                - tactician.middleware.locking
 # Doctrine transactional middleware, requires additional package - https://github.com/thephpleague/tactician-doctrine
-#                - tactician.middleware.doctrine
+                - tactician.middleware.doctrine
+                - tactician.middleware.flush
                 - tactician.middleware.command_handler

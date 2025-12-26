@@ -11,6 +11,16 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
+    App\Shared\Infrastructure\Middleware\DoctrineFlushMiddleware:
+        public: true
+        autowire: true
+        autoconfigure: true
+        arguments: [ '@doctrine.orm.entity_manager' ]
+
+    tactician.middleware.flush:
+        alias: App\Shared\Infrastructure\Middleware\DoctrineFlushMiddleware
+        public: true
+
     _instanceof:
         App\Shared\Domain\Bus\Query\QueryHandler:
             public: true
@@ -23,6 +33,8 @@ services:
 
     App\:
         resource: '../src/'
+        exclude:
+            - '../src/Shared/Infrastructure/Middleware/DoctrineFlushMiddleware.php'
 
     App\Casfid\Scraper\Infrastructure\Source\Services\SourceScraper\:
         resource: '../src/Casfid/Scraper/Infrastructure/Source/Services/SourceScraper/*'
