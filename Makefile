@@ -15,6 +15,9 @@ composer-install:
 migrations:
 	docker container exec -it ${DOCKER_CONTAINER_NAME} php bin/console doctrine:migrations:migrate --no-interaction
 
+scrap-news:
+	docker container exec -it ${DOCKER_CONTAINER_NAME} php bin/console casfid:scrap-news
+
 exec:
 	docker container exec -it $(DOCKER_CONTAINER_NAME) $(filter-out $@,$(MAKECMDGOALS))
 
