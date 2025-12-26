@@ -3,12 +3,14 @@
 namespace App\Casfid\Scraper\Application\ScrapSources;
 
 use App\Casfid\Scraper\Domain\Source\Model\SourceFactoryInterface;
+use App\Casfid\Scraper\Domain\Source\Model\SourceRepositoryInterface;
 use App\Shared\Domain\Bus\Command\CommandHandler;
 
-readonly class ScrapSourcesCommandHandler implements CommandHandler
+class ScrapSourcesCommandHandler implements CommandHandler
 {
     public function __construct(
-        protected readonly SourceFactoryInterface $sourceFactory
+        protected readonly SourceFactoryInterface $sourceFactory,
+        protected readonly SourceRepositoryInterface $sourceRepository
     )
     {
 
@@ -17,6 +19,20 @@ readonly class ScrapSourcesCommandHandler implements CommandHandler
     public function handle(ScrapSourcesCommand $command): int
     {
         $sources = $this->sourceFactory->getSources($command->limit);
-        return count($sources);
+
+        $newSources = [];
+
+        foreach ($sources as $source) {
+            $hash = $source->hash();
+
+            if($this->sourceRepository->sourceExists($hash)) {
+                continue;
+            }
+
+            $this->sourceRepository->save($source);
+            $newSources[] = $source;
+        }
+
+        return count($newSources);
     }
 }

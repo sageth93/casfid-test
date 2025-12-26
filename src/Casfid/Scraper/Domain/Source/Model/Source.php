@@ -11,14 +11,14 @@ use DateTimeInterface;
 class Source
 {
     public function __construct(
-        public readonly SourceId $id,
-        public readonly SourceUrl $url,
-        public readonly SourceOrigin $origin,
-        public readonly SourceHash $hash,
-        public readonly DateTimeInterface $createdAt,
-        public ?DateTimeInterface $updatedAt,
-        public ?DateTimeInterface $deletedAt,
-        public bool $pending
+        protected readonly SourceId $id,
+        protected readonly SourceUrl $url,
+        protected readonly SourceOrigin $origin,
+        protected readonly SourceHash $hash,
+        protected readonly DateTimeInterface $createdAt,
+        protected ?DateTimeInterface $updatedAt,
+        protected ?DateTimeInterface $deletedAt,
+        protected bool $pending
     )
     {
     }
@@ -40,14 +40,49 @@ class Source
         );
     }
 
-    public function scrapDone(): void
+    public function id(): SourceId
     {
-        $this->pending = false;
-        $this->updatedAt = new \DateTimeImmutable();
+        return $this->id;
+    }
+
+    public function url(): SourceUrl
+    {
+        return $this->url;
+    }
+
+    public function origin(): SourceOrigin
+    {
+        return $this->origin;
+    }
+
+    public function hash(): SourceHash
+    {
+        return $this->hash;
+    }
+
+    public function createdAt(): DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function updatedAt(): ?DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function deletedAt(): ?DateTimeInterface
+    {
+        return $this->deletedAt;
     }
 
     public function isPending(): bool
     {
         return $this->pending;
+    }
+
+    public function scrapDone(): void
+    {
+        $this->pending = false;
+        $this->updatedAt = new \DateTimeImmutable();
     }
 }

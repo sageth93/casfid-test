@@ -21,7 +21,7 @@ class SourceOriginType extends CustomStringType
 
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        return $value->value();
+        return $value->value;
     }
 
     public function convertToPHPValue($value, AbstractPlatform $platform): SourceOrigin
