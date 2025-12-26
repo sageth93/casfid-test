@@ -9,11 +9,6 @@ class InvalidSourceScraperConfigurationException extends  \RuntimeException
         return new self(sprintf('The class %s does not implement SourceScraperInterface', $class));
     }
 
-    public static function invalidOrigin(string $class): self
-    {
-        return new self(sprintf('Scraper %s returned an invalid origin.', $class));
-    }
-
     public static function duplicatedOrigin(string $class): self
     {
         return new self(sprintf('Scraper %s has duplicated origin', $class));

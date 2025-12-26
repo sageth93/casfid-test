@@ -20,9 +20,9 @@ class SourceProvider extends Provider
         ?DateTimeInterface $updatedAt = null,
         ?DateTimeInterface $deletedAt = null,
         ?bool $pending = null
-    )
+    ): Source
     {
-        $fakerUrl = $this->generator->url();
+        $fakerUrl = 'https://www.elpais.com/elpais/2022/01/24/actualidad/1643022293_302577.html';
         return new Source(
             id: $id ?? SourceId::create(),
             url: $url ?? new SourceUrl($fakerUrl),

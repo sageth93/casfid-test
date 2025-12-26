@@ -18,6 +18,9 @@ migrations:
 scrap-news:
 	docker container exec -it ${DOCKER_CONTAINER_NAME} php bin/console casfid:scrap-news
 
+phpunit:
+	docker container exec -it ${DOCKER_CONTAINER_NAME} vendor/phpunit/phpunit/phpunit
+
 exec:
 	docker container exec -it $(DOCKER_CONTAINER_NAME) $(filter-out $@,$(MAKECMDGOALS))
 

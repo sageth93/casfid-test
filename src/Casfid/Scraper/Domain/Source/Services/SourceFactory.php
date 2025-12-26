@@ -5,7 +5,6 @@ namespace App\Casfid\Scraper\Domain\Source\Services;
 use App\Casfid\Scraper\Domain\Source\Model\Exceptions\InvalidSourceScraperConfigurationException;
 use App\Casfid\Scraper\Domain\Source\Model\SourceFactoryInterface;
 use App\Casfid\Scraper\Domain\Source\Model\SourceScraperInterface;
-use App\Casfid\Scraper\Domain\Source\Model\ValueObject\SourceOrigin;
 
 class SourceFactory implements SourceFactoryInterface
 {
@@ -21,7 +20,12 @@ class SourceFactory implements SourceFactoryInterface
     {
         $this->validateScrapers();
 
-        return [];
+        $sources = [];
+
+        foreach ($this->scrapers as $scraper) {
+            $sources = array_merge($sources, $scraper->scrap($limit)) ;
+        }
+        return $sources;
     }
 
     private function validateScrapers(): void
@@ -31,10 +35,6 @@ class SourceFactory implements SourceFactoryInterface
            foreach ($this->scrapers as $scraper) {
                if( !($scraper instanceof SourceScraperInterface)) {
                     throw InvalidSourceScraperConfigurationException::invalidInterface($scraper::class);
-               }
-
-               if( !SourceOrigin::tryFrom($scraper->origin()->value)) {
-                   throw InvalidSourceScraperConfigurationException::invalidOrigin($scraper::class);
                }
 
                $origin = $scraper->origin()->value;
