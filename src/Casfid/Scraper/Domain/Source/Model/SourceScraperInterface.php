@@ -8,6 +8,8 @@ interface SourceScraperInterface
 {
     public function origin(): SourceOrigin;
 
+    public function newsIndex(): string;
+
     /** @return Source[] */
     public function scrap(int $limit): array;
 }
