@@ -8,4 +8,6 @@ interface NewsRepositoryInterface
 
     /** @return News[] */
     public function findAll(): array;
+
+    public function save(News $news): void;
 }

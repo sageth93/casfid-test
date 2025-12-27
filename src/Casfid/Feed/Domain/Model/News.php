@@ -17,6 +17,26 @@ class News
     {
     }
 
+    public static function create(
+        string $id,
+        string $title,
+        string $content,
+        string $author,
+        ?\DateTimeImmutable $date
+    ): self
+    {
+        return new self(
+            id: $id,
+            title: $title,
+            content: $content,
+            author: $author,
+            date: $date ?? null,
+            createdAt: new \DateTimeImmutable(),
+            updatedAt: null,
+            deletedAt: null
+        );
+    }
+
     public function id(): string
     {
         return $this->id;

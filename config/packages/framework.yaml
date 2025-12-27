@@ -10,6 +10,8 @@ framework:
             max_redirects: 2
 
     exceptions:
+        App\Casfid\Feed\Domain\Model\Exception\NewsAlreadyExistsException:
+            status_code: 409
         App\Casfid\Feed\Domain\Model\Exception\NewsNotFoundException:
             status_code: 404
 
