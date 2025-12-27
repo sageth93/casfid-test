@@ -21,7 +21,6 @@ class NewsScraperFactory implements NewsScraperFactoryInterface
         foreach ($this->scrapers as $scraper) {
             if( $scraper->origin()->equals($origin))
             {
-                dump($scraper);
                 return $scraper;
             }
         }
