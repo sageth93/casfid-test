@@ -34,6 +34,12 @@ doctrine:
                         dir: '%kernel.project_dir%/src/Casfid/Scraper/Infrastructure/Persistence/Doctrine/ORM/Mapping/News'
                         prefix: 'App\Casfid\Scraper\Domain\News\Model'
                         alias: App\Casfid\Scraper\Domain\News\Model
+                    App/Feed/News:
+                        type: xml
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/Casfid/Feed/Infrastructure/Persistence/Doctrine/ORM/Mapping/'
+                        prefix: 'App\Casfid\Feed\Domain\Model'
+                        alias: App\Casfid\Feed\Domain\Model
 
 when@test:
     doctrine:

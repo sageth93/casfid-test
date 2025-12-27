@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Casfid\Feed\Domain\Model\News"
+            table="news"
+            repository-class="App\Casfid\Feed\Infrastructure\Persistence\Doctrine\ORM\NewsRepository">
+
+        <id name="id" type="string" column="id" length="36"/>
+        <field name="title" type="string" column="title" length="255"/>
+        <field name="content" type="string" column="content" />
+        <field name="author" type="string" column="author" length="255"/>
+        <field name="date" type="datetime_immutable" column="news_date"/>
+        <field name="createdAt" type="datetime_immutable" column="created_at"/>
+        <field name="updatedAt" type="datetime_immutable" column="updated_at" nullable="true"/>
+    </entity>
+
+</doctrine-mapping>
