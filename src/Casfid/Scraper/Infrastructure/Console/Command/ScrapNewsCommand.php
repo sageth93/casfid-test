@@ -2,7 +2,7 @@
 
 namespace App\Casfid\Scraper\Infrastructure\Console\Command;
 
-use App\Casfid\Scraper\Application\ScrapSources\ScrapSourcesCommand;
+use App\Casfid\Scraper\Application\Source\ScrapSources\ScrapSourcesCommand;
 use League\Tactician\CommandBus;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Attribute\Option;

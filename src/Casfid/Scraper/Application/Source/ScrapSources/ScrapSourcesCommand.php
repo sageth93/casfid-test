@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Casfid\Scraper\Application\ScrapSources;
+namespace App\Casfid\Scraper\Application\Source\ScrapSources;
 
 use App\Shared\Domain\Bus\Command\Command;
 

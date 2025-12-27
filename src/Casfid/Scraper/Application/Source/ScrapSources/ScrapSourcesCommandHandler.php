@@ -1,16 +1,19 @@
 <?php
 
-namespace App\Casfid\Scraper\Application\ScrapSources;
+namespace App\Casfid\Scraper\Application\Source\ScrapSources;
 
+use App\Casfid\Scraper\Domain\Source\Event\NewPendingSourceEvent;
 use App\Casfid\Scraper\Domain\Source\Model\SourceFactoryInterface;
 use App\Casfid\Scraper\Domain\Source\Model\SourceRepositoryInterface;
 use App\Shared\Domain\Bus\Command\CommandHandler;
+use App\Shared\Domain\Event\EventPublisherInterface;
 
 class ScrapSourcesCommandHandler implements CommandHandler
 {
     public function __construct(
         protected readonly SourceFactoryInterface $sourceFactory,
-        protected readonly SourceRepositoryInterface $sourceRepository
+        protected readonly SourceRepositoryInterface $sourceRepository,
+        protected readonly EventPublisherInterface $eventPublisher
     )
     {
 
@@ -21,7 +24,6 @@ class ScrapSourcesCommandHandler implements CommandHandler
         $sources = $this->sourceFactory->getSources($command->limit);
 
         $newSources = [];
-
         foreach ($sources as $source) {
             $hash = $source->hash();
 
@@ -31,6 +33,13 @@ class ScrapSourcesCommandHandler implements CommandHandler
 
             $this->sourceRepository->save($source);
             $newSources[] = $source;
+
+        }
+
+        foreach ($newSources as $source) {
+            $this->eventPublisher->publish(
+                new NewPendingSourceEvent($source->id())
+            );
         }
 
         return count($newSources);

@@ -18,6 +18,9 @@ migrations:
 scrap-news:
 	docker container exec -it ${DOCKER_CONTAINER_NAME} php bin/console casfid:scrap-news
 
+messenger-consume:
+	docker container exec -it ${DOCKER_CONTAINER_NAME} php bin/console messenger:consume async --time-limit=3600
+
 phpunit:
 	docker container exec -it ${DOCKER_CONTAINER_NAME} vendor/phpunit/phpunit/phpunit
 
