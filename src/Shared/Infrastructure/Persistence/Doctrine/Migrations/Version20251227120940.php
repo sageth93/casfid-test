@@ -22,7 +22,7 @@ final class Version20251227120940 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE news (
             id VARCHAR(36) NOT NULL COMMENT \'(DC2Type:NewsId)\',
-            source_id VARCHAR(36) NOT NULL COMMENT \'(DC2Type:SourceId)\',
+            source_id VARCHAR(36) DEFAULT NULL COMMENT \'(DC2Type:SourceId)\',
             title VARCHAR(255) NOT NULL COMMENT \'(DC2Type:NewsTitle)\',
             content LONGTEXT NOT NULL COMMENT \'(DC2Type:NewsContent)\',
             author VARCHAR(255) NOT NULL COMMENT \'(DC2Type:NewsAuthor)\',

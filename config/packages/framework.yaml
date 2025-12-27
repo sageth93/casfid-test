@@ -4,13 +4,14 @@ framework:
 
     # Note that the session will be started ONLY if you read or write from it.
     session: true
-
+    handle_all_throwables: true
     http_client:
         default_options:
             max_redirects: 2
 
-    #esi: true
-    #fragments: true
+    exceptions:
+        App\Casfid\Feed\Domain\Model\Exception\NewsNotFoundException:
+            status_code: 404
 
 when@test:
     framework:

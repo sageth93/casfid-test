@@ -1,5 +1,5 @@
-controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
+casfid_feed_controllers:
+    resource: '../src/Casfid/Feed/Infrastructure/API/Feed'
     type: attribute
+    defaults: { attribute: 'json' }
+    prefix: /api
