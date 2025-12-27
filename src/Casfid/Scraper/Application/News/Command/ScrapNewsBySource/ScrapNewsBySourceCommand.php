@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Casfid\Scraper\Application\News\ScrapNewsBySource;
+namespace App\Casfid\Scraper\Application\News\Command\ScrapNewsBySource;
 
 use App\Shared\Domain\Bus\Command\Command;
 

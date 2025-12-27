@@ -2,8 +2,8 @@
 
 namespace App\Tests\Unit\Casfid\Scraper\Application\Source\ScrapSources;
 
-use App\Casfid\Scraper\Application\Source\ScrapSources\ScrapSourcesCommand;
-use App\Casfid\Scraper\Application\Source\ScrapSources\ScrapSourcesCommandHandler;
+use App\Casfid\Scraper\Application\Source\Command\ScrapSources\ScrapSourcesCommand;
+use App\Casfid\Scraper\Application\Source\Command\ScrapSources\ScrapSourcesCommandHandler;
 use App\Casfid\Scraper\Domain\Source\Event\NewPendingSourceEvent;
 use App\Casfid\Scraper\Domain\Source\Model\SourceFactoryInterface;
 use App\Casfid\Scraper\Domain\Source\Model\SourceRepositoryInterface;

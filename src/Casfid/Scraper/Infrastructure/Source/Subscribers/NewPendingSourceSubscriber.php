@@ -2,7 +2,7 @@
 
 namespace App\Casfid\Scraper\Infrastructure\Source\Subscribers;
 
-use App\Casfid\Scraper\Application\News\ScrapNewsBySource\ScrapNewsBySourceCommand;
+use App\Casfid\Scraper\Application\News\Command\ScrapNewsBySource\ScrapNewsBySourceCommand;
 use App\Casfid\Scraper\Domain\Source\Event\NewPendingSourceEvent;
 use App\Shared\Domain\Event\EventInterface;
 use App\Shared\Domain\Event\EventSubscriberInterface;

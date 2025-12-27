@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Casfid\Scraper\Application\Source\ScrapSources;
+namespace App\Casfid\Scraper\Application\Source\Command\ScrapSources;
 
 use App\Casfid\Scraper\Domain\Source\Event\NewPendingSourceEvent;
 use App\Casfid\Scraper\Domain\Source\Model\SourceFactoryInterface;
