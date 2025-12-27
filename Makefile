@@ -21,6 +21,9 @@ scrap-news:
 messenger-consume:
 	docker container exec -it ${DOCKER_CONTAINER_NAME} php bin/console messenger:consume async -vv
 
+messenger-retry:
+	docker container exec -it ${DOCKER_CONTAINER_NAME} php bin/console messenger:failed:retry -vv
+
 phpunit:
 	docker container exec -it ${DOCKER_CONTAINER_NAME} vendor/phpunit/phpunit/phpunit
 

@@ -6,14 +6,18 @@ framework:
         buses:
             default: ~
             async: ~
+        failure_transport: failed
         transports:
             # https://symfony.com/doc/current/messenger.html#transport-configuration
             # async: '%env(MESSENGER_TRANSPORT_DSN)%'
-            # failed: 'doctrine://default?queue_name=failed'
             async:
                 dsn: doctrine://default?queue_name=async
                 options:
                     table_name: messenger_messages
+            failed:
+                dsn: doctrine://default?queue_name=failed
+                options:
+                    table_name: messenger_messages_failed
         routing:
             'App\Shared\Domain\Bus\Command\Command': async
             # Route your messages to the transports
