@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Casfid\Scraper\Infrastructure\Source\Services;
+namespace App\Casfid\Scraper\Infrastructure\Scraper;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 

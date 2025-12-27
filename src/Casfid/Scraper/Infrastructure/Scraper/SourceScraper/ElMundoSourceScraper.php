@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Casfid\Scraper\Infrastructure\Source\Services\SourceScraper;
+namespace App\Casfid\Scraper\Infrastructure\Scraper\SourceScraper;
 
 use App\Casfid\Scraper\Domain\Source\Model\Source;
+use App\Casfid\Scraper\Domain\Source\Model\SourceScraperInterface;
 use App\Casfid\Scraper\Domain\Source\Model\ValueObject\SourceOrigin;
 use App\Casfid\Scraper\Domain\Source\Model\ValueObject\SourceUrl;
-use App\Casfid\Scraper\Infrastructure\Source\Services\BaseSourceScraper;
+use App\Casfid\Scraper\Infrastructure\Scraper\BaseScraper;
 
-class ElMundoSourceScraper extends BaseSourceScraper
+class ElMundoSourceScraper extends BaseScraper implements SourceScraperInterface
 {
     public function origin(): SourceOrigin
     {

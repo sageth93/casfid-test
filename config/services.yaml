@@ -42,10 +42,18 @@ services:
         resource: '../src/Casfid/Scraper/Infrastructure/Source/Subscribers/*'
         tags: [ 'app.event_subscriber' ]
 
-    App\Casfid\Scraper\Infrastructure\Source\Services\SourceScraper\:
-        resource: '../src/Casfid/Scraper/Infrastructure/Source/Services/SourceScraper/*'
+    App\Casfid\Scraper\Infrastructure\Scraper\SourceScraper\:
+        resource: '../src/Casfid/Scraper/Infrastructure/Scraper/SourceScraper/*'
         tags: ['app.source_scraper']
+
+    App\Casfid\Scraper\Infrastructure\Scraper\NewsScraper\:
+        resource: '../src/Casfid/Scraper/Infrastructure/Scraper/NewsScraper/*'
+        tags: ['app.news_scraper']
 
     App\Casfid\Scraper\Domain\Source\Services\SourceFactory:
         arguments:
             $scrapers: !tagged_iterator app.source_scraper
+
+    App\Casfid\Scraper\Domain\News\Services\NewsScraperFactory:
+        arguments:
+            $scrapers: !tagged_iterator app.news_scraper

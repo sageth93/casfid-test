@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Casfid\Scraper\Infrastructure\Source\Services;
+namespace App\Casfid\Scraper\Infrastructure\Scraper;
 
 use App\Casfid\Scraper\Domain\Source\Model\SourceScraperInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
-abstract class BaseSourceScraper implements SourceScraperInterface
+abstract class BaseScraper
 {
     public function __construct(
         protected HttpHtmlClient $client,
