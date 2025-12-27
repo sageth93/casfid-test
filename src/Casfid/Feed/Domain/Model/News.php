@@ -42,13 +42,18 @@ class News
         string $content,
         string $author,
         \DateTimeImmutable $date
-    ){
+    ): void {
         $this->title = $title;
         $this->content = $content;
         $this->author = $author;
         $this->date = $date;
 
         $this->updatedAt = new \DateTimeImmutable();
+    }
+
+    public function delete(): void
+    {
+        $this->deletedAt = new \DateTimeImmutable();
     }
 
     public function id(): string

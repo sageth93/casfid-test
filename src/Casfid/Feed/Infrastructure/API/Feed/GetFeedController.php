@@ -21,7 +21,10 @@ class GetFeedController extends BaseController
             ref: new Model(type: NewsResponse::class)
         )
     )]
-    #[OA\Response(response: 404, description: 'News not found with given Id')]
+    #[OA\Response(
+        response: 404,
+        description: 'News Not Found'
+    )]
     public function __invoke(
         string $id
     ): JsonResponse
