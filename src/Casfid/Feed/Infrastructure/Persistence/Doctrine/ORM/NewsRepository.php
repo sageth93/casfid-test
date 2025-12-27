@@ -10,7 +10,6 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @method News|null find($id, $lockMode = null, $lockVersion = null)
  * @method News|null findOneBy(array $criteria, array $orderBy = null)
- * @method News[]    findAll()
  * @method News[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class NewsRepository extends ServiceEntityRepository implements NewsRepositoryInterface
@@ -28,5 +27,13 @@ class NewsRepository extends ServiceEntityRepository implements NewsRepositoryIn
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    public function findAll(): array {
+        return $this->createQueryBuilder('c')
+            ->where('c.deletedAt IS NULL')
+            ->orderBy('c.date', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 }
