@@ -37,6 +37,20 @@ class News
         );
     }
 
+    public function update(
+        string $title,
+        string $content,
+        string $author,
+        \DateTimeImmutable $date
+    ){
+        $this->title = $title;
+        $this->content = $content;
+        $this->author = $author;
+        $this->date = $date;
+
+        $this->updatedAt = new \DateTimeImmutable();
+    }
+
     public function id(): string
     {
         return $this->id;

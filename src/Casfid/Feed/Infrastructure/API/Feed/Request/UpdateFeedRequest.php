@@ -5,19 +5,8 @@ namespace App\Casfid\Feed\Infrastructure\API\Feed\Request;
 use Symfony\Component\Validator\Constraints as Assert;
 use OpenApi\Attributes as OA;
 
-class AddFeedRequest
+class UpdateFeedRequest
 {
-    #[Assert\NotBlank]
-    #[Assert\Uuid]
-    #[OA\Property(
-        description: "Unique identifier for the news",
-        type: "string",
-        format: "uuid",
-        example: "123e4567-e89b-12d3-a456-426655440000"
-    )]
-    public string $id;
-
-    #[Assert\NotBlank]
     #[Assert\Length(min: 3)]
     #[Assert\Length(max: 100)]
     #[OA\Property(
@@ -25,18 +14,16 @@ class AddFeedRequest
         type: "string",
         example: "What is Lorem Ipsum?"
     )]
-    public string $title;
+    public ?string $title;
 
-    #[Assert\NotBlank]
     #[Assert\Length(min: 3)]
     #[OA\Property(
         description: "Content of the news",
         type: "string",
         example: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     )]
-    public string $content;
+    public ?string $content;
 
-    #[Assert\NotBlank]
     #[Assert\Length(min: 3)]
     #[Assert\Length(max: 100)]
     #[OA\Property(
@@ -44,7 +31,7 @@ class AddFeedRequest
         type: "string",
         example: "Cicero"
     )]
-    public string $author;
+    public ?string $author;
 
     #[Assert\Type(\DateTimeInterface::class)]
     #[OA\Property(
@@ -52,9 +39,9 @@ class AddFeedRequest
     )]
     public ?\DateTimeInterface $date;
     public function __construct(
-        string $title,
-        string $content,
-        string $author,
+        ?string $title,
+        ?string $content,
+        ?string $author,
         ?\DateTimeInterface $date
     )
     {
