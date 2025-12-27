@@ -33,7 +33,6 @@ class ScrapSourcesCommandHandler implements CommandHandler
 
             $this->sourceRepository->save($source);
             $newSources[] = $source;
-
         }
 
         foreach ($newSources as $source) {
