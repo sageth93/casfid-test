@@ -9,6 +9,8 @@ down:
 php:
 	docker container exec -it ${DOCKER_CONTAINER_NAME} bash
 
+setup: composer-install migrations
+
 composer-install:
 	docker container exec -it ${DOCKER_CONTAINER_NAME} composer install
 
@@ -24,8 +26,5 @@ scrap-news:
 messenger-consume:
 	docker container exec -it ${DOCKER_CONTAINER_NAME} php bin/console messenger:consume async -vv
 
-messenger-retry:
-	docker container exec -it ${DOCKER_CONTAINER_NAME} php bin/console messenger:failed:retry -vv
-
 phpunit:
-	docker container exec -it ${DOCKER_CONTAINER_NAME} vendor/phpunit/phpunit/phpunit
+	docker container exec -it ${DOCKER_CONTAINER_NAME} php bin/phpunit
