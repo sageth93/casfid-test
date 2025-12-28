@@ -31,6 +31,10 @@ class ElMundoSourceScraper extends BaseScraper implements SourceScraperInterface
                 return;
             }
 
+            if(!$node->filter('header a')->count()){
+                return;
+            }
+
             $link = $node->filter('header a')->link();
 
             $sources[] = Source::create(
