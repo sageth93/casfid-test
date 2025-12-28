@@ -4,10 +4,10 @@ namespace App\Casfid\Scraper\Infrastructure\Scraper;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-readonly class HttpHtmlClient
+class HttpHtmlClient
 {
     public function __construct(
-        protected HttpClientInterface $client
+        protected readonly HttpClientInterface $client
     )
     {
     }

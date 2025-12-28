@@ -7,7 +7,7 @@ use App\Casfid\Scraper\Domain\Source\Model\SourceScraperInterface;
 use App\Casfid\Scraper\Domain\Source\Model\ValueObject\SourceOrigin;
 use App\Casfid\Scraper\Domain\Source\Model\ValueObject\SourceUrl;
 use App\Casfid\Scraper\Infrastructure\Scraper\Base\BaseScraper;
-use App\Casfid\Scraper\Infrastructure\Scraper\Model\ScraperMainContentMissing;
+use App\Casfid\Scraper\Infrastructure\Scraper\Model\ScraperMainContentMissingException;
 
 class ElPaisSourceScraper extends BaseScraper implements SourceScraperInterface
 {
@@ -28,7 +28,7 @@ class ElPaisSourceScraper extends BaseScraper implements SourceScraperInterface
         $sources = [];
 
         if($crawler->filter('article')->count() === 0) {
-            throw ScraperMainContentMissing::create(self::class, $this->newsIndex());
+            throw ScraperMainContentMissingException::create(self::class, $this->newsIndex());
         }
 
         $crawler->filter('article')->each(function ($node) use (&$sources, $limit){

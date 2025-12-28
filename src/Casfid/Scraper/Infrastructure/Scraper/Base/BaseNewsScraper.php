@@ -14,7 +14,7 @@ abstract class BaseNewsScraper extends BaseScraper implements NewsScraperInterfa
 {
     protected function createNews(
         Source $source,
-        string $title,
+        ?string $title,
         array $content,
         array $authors = [],
         ?string $rawDate = null

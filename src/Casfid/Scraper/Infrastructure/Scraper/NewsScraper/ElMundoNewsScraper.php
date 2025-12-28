@@ -6,7 +6,7 @@ use App\Casfid\Scraper\Domain\News\Model\News;
 use App\Casfid\Scraper\Domain\Source\Model\Source;
 use App\Casfid\Scraper\Domain\Source\Model\ValueObject\SourceOrigin;
 use App\Casfid\Scraper\Infrastructure\Scraper\Base\BaseNewsScraper;
-use App\Casfid\Scraper\Infrastructure\Scraper\Model\ScraperMainContentMissing;
+use App\Casfid\Scraper\Infrastructure\Scraper\Model\ScraperMainContentMissingException;
 
 class ElMundoNewsScraper extends BaseNewsScraper
 {
@@ -21,7 +21,7 @@ class ElMundoNewsScraper extends BaseNewsScraper
         $crawler = $this->getCrawler($source->url());
 
         if ($crawler->filter('article.ue-c-article')->count() === 0) {
-            throw ScraperMainContentMissing::create(self::class, $source->url());
+            throw ScraperMainContentMissingException::create(self::class, $source->url());
         }
 
         $article = $crawler->filter('article.ue-c-article')->first();
@@ -29,7 +29,7 @@ class ElMundoNewsScraper extends BaseNewsScraper
         $title = $this->text($article, 'h1');
 
         if ($crawler->filter('div[data-section=articleBody]')->count() === 0) {
-            throw ScraperMainContentMissing::create(self::class, $source->url());
+            throw ScraperMainContentMissingException::create(self::class, $source->url());
         }
 
         $articleBody = $article->filter('div[data-section=articleBody]')->first();
