@@ -7,7 +7,9 @@ use App\Casfid\Scraper\Domain\Source\Model\Source;
 use App\Casfid\Scraper\Domain\Source\Model\ValueObject\SourceOrigin;
 use App\Casfid\Scraper\Domain\Source\Services\SourceFactory;
 use App\Tests\Unit\Casfid\Scraper\Domain\Source\Model\SourceTestCase;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 
+#[AllowMockObjectsWithoutExpectations]
 class SourceFactoryTest extends SourceTestCase
 {
     public function test_givenSourceFactory_whenGetSources_thenReturnSourceArray()

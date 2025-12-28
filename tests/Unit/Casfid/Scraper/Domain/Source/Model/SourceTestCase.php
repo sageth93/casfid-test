@@ -22,7 +22,8 @@ class SourceTestCase extends TestCase
     protected function createSourceScraper(SourceOrigin $origin): MockObject|SourceScraperInterface {
         $mock = $this->getMockBuilder(SourceScraperInterface::class)->getMock();
 
-        $mock->method('origin')->willReturn($origin);
+        $mock->method('origin')
+            ->willReturn($origin);
 
         return $mock;
     }

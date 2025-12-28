@@ -32,9 +32,9 @@ class ScrapNewsBySourceCommandHandlerTest extends TestCase
     protected function setUp(): void
     {
         $this->sourceRepository = $this->createMock(SourceRepositoryInterface::class);
-        $this->newsRepository = $this->createMock(NewsRepositoryInterface::class);
-        $this->scraperFactory = $this->createMock(NewsScraperFactoryInterface::class);
-        $this->scraper = $this->createMock(NewsScraperInterface::class);
+        $this->newsRepository = $this->createStub(NewsRepositoryInterface::class);
+        $this->scraperFactory = $this->createStub(NewsScraperFactoryInterface::class);
+        $this->scraper = $this->createStub(NewsScraperInterface::class);
 
         $this->faker = Factory::create();
 
@@ -49,6 +49,7 @@ class ScrapNewsBySourceCommandHandlerTest extends TestCase
     {
         $this->expectException(SourceNotFoundException::class);
         $this->sourceRepository
+            ->expects($this->once())
             ->method('findById')
             ->willReturn(null);
 
@@ -61,9 +62,12 @@ class ScrapNewsBySourceCommandHandlerTest extends TestCase
     public function test_GivenNewsHandler_WhenSourceIsNotPending_ThenThrowException()
     {
         $source = $this->createMock(Source::class);
-        $source->method('isPending')->willReturn(false);
+        $source->expects($this->once())
+            ->method('isPending')
+            ->willReturn(false);
 
         $this->sourceRepository
+            ->expects($this->once())
             ->method('findById')
             ->willReturn($source);
 
@@ -84,10 +88,12 @@ class ScrapNewsBySourceCommandHandlerTest extends TestCase
 
         $news = $this->createMock(News::class);
 
-        $news->method('source')
+        $news->expects($this->once())
+            ->method('source')
             ->willReturn($source);
 
         $this->sourceRepository
+            ->expects($this->once())
             ->method('findById')
             ->willReturn($source);
 
@@ -96,7 +102,6 @@ class ScrapNewsBySourceCommandHandlerTest extends TestCase
             ->willReturn($this->scraper);
 
         $this->scraper
-            ->expects($this->once())
             ->method('scrap')
             ->with($source)
             ->willReturn($news);
@@ -105,7 +110,6 @@ class ScrapNewsBySourceCommandHandlerTest extends TestCase
             ->method('scrapDone');
 
         $this->newsRepository
-            ->expects($this->once())
             ->method('save')
             ->with($news);
 

@@ -34,7 +34,9 @@ class ScrapSourcesCommandHandlerTest extends SourceTestCase
 
     public function test_givenSourcesHandler_whenNoSourcesFounded_thenDoNothing()
     {
-        $this->factory->method('getSources')->willReturn([]);
+        $this->factory->expects($this->once())
+            ->method('getSources')
+            ->willReturn([]);
 
         $this->repository->expects($this->never())->method('save');
         $this->publisher->expects($this->never())->method('publish');
@@ -45,15 +47,19 @@ class ScrapSourcesCommandHandlerTest extends SourceTestCase
 
     public function test_givenSourcesHandler_whenSourcesFounded_thenSaveSources()
     {
-        $this->factory->method('getSources')->willReturn([
-            $this->faker->source(),
-            $this->faker->source(),
-            $this->faker->source(),
-            $this->faker->source(),
-            $this->faker->source()
-        ]);
+        $this->factory->expects($this->once())
+            ->method('getSources')
+            ->willReturn([
+                $this->faker->source(),
+                $this->faker->source(),
+                $this->faker->source(),
+                $this->faker->source(),
+                $this->faker->source()
+            ]
+        );
 
-        $this->repository->method('sourceExists')->willReturn(false);
+        $this->repository->expects($this->exactly(5))
+            ->method('sourceExists')->willReturn(false);
 
         $this->repository->expects($this->exactly(5))->method('save');
         $this->publisher
@@ -67,12 +73,16 @@ class ScrapSourcesCommandHandlerTest extends SourceTestCase
 
     public function test_givenSourcesHandler_whenSourcesFounded_thenOnySaveNonDuplicatedSources()
     {
-        $this->factory->method('getSources')->willReturn([
-            $this->faker->source(),
-            $this->faker->source(),
-        ]);
+        $this->factory->expects($this->once())
+            ->method('getSources')
+            ->willReturn([
+                $this->faker->source(),
+                $this->faker->source(),
+                ]
+            );
 
-        $this->repository->method('sourceExists')
+        $this->repository->expects($this->exactly(2))
+            ->method('sourceExists')
             ->willReturnOnConsecutiveCalls(true, false);
 
         $this->repository->expects($this->exactly(1))->method('save');
