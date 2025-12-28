@@ -30,7 +30,7 @@ class AddFeedController extends BaseController
             properties: [
                 new OA\Property(property: 'title', type: 'string', example: 'Unprocessable Content'),
                 new OA\Property(property: 'status', type: 'int', example: 422),
-                new OA\Property(property: 'detail', type: 'string', example: 'This is not a valid UUID.')
+                new OA\Property(property: 'detail', type: 'string', example: 'Title is required')
             ]
         )
     )]
@@ -51,7 +51,6 @@ class AddFeedController extends BaseController
     {
         $this->handle(
             new AddNewsCommand(
-                id: $request->id,
                 title: $request->title,
                 content: $request->content,
                 author: $request->author,

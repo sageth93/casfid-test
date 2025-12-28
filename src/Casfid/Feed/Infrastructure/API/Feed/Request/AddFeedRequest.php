@@ -8,16 +8,6 @@ use OpenApi\Attributes as OA;
 class AddFeedRequest
 {
     #[Assert\NotBlank]
-    #[Assert\Uuid]
-    #[OA\Property(
-        description: "Unique identifier for the news",
-        type: "string",
-        format: "uuid",
-        example: "123e4567-e89b-12d3-a456-426655440000"
-    )]
-    public string $id;
-
-    #[Assert\NotBlank]
     #[Assert\Length(min: 3)]
     #[Assert\Length(max: 100)]
     #[OA\Property(

@@ -5,6 +5,7 @@ namespace App\Casfid\Feed\Domain\Services;
 use App\Casfid\Feed\Domain\Model\News;
 use App\Casfid\Feed\Domain\Model\NewsCreatorInterface;
 use App\Casfid\Feed\Domain\Model\NewsRepositoryInterface;
+use App\Shared\Domain\Model\ValueObject\UuidValueObject;
 
 class NewsCreator implements NewsCreatorInterface
 {
@@ -15,7 +16,6 @@ class NewsCreator implements NewsCreatorInterface
 
     }
     public function add(
-        string $id,
         string $title,
         string $content,
         string $author,
@@ -23,7 +23,7 @@ class NewsCreator implements NewsCreatorInterface
     ): void
     {
         $news = News::create(
-            id: $id,
+            id: UuidValueObject::create(),
             title: $title,
             content: $content,
             author: $author,
