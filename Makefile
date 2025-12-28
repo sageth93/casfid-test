@@ -15,8 +15,11 @@ composer-install:
 migrations:
 	docker container exec -it ${DOCKER_CONTAINER_NAME} php bin/console doctrine:migrations:migrate --no-interaction
 
+populate-bbdd:
+	docker container exec -it ${DOCKER_CONTAINER_NAME} php bin/console doctrine:fixtures:load
+
 scrap-news:
-	docker container exec -it ${DOCKER_CONTAINER_NAME} php bin/console casfid:scrap-news
+	docker container exec -it ${DOCKER_CONTAINER_NAME} php bin/console casfid:scrap-news -v
 
 messenger-consume:
 	docker container exec -it ${DOCKER_CONTAINER_NAME} php bin/console messenger:consume async -vv
@@ -26,9 +29,3 @@ messenger-retry:
 
 phpunit:
 	docker container exec -it ${DOCKER_CONTAINER_NAME} vendor/phpunit/phpunit/phpunit
-
-exec:
-	docker container exec -it $(DOCKER_CONTAINER_NAME) $(filter-out $@,$(MAKECMDGOALS))
-
-%:
-	@:
