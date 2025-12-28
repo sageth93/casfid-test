@@ -44,6 +44,7 @@ services:
 
     App\Casfid\Scraper\Infrastructure\Scraper\SourceScraper\:
         resource: '../src/Casfid/Scraper/Infrastructure/Scraper/SourceScraper/*'
+        exclude: '../src/Casfid/Scraper/Infrastructure/Scraper/SourceScraper/SourceScraperInterface.php'
         tags: ['app.source_scraper']
 
     App\Casfid\Scraper\Infrastructure\Scraper\NewsScraper\:

@@ -23,7 +23,12 @@ class ScrapNewsCommand extends Command
         #[Option(description: 'Number of news to scrap for each origin')] int $limit = 5
     ): int
     {
-        $sourcesFind = $this->commandBus->handle(new ScrapSourcesCommand($limit));
+        try {
+            $sourcesFind = $this->commandBus->handle(new ScrapSourcesCommand($limit));
+        } catch (\Throwable $e) {
+            $io->error($e->getMessage());
+            return Command::FAILURE;
+        }
 
         $io->success("Scraped {$sourcesFind} news");
         return Command::SUCCESS;
