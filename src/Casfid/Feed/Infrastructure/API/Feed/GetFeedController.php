@@ -23,7 +23,14 @@ class GetFeedController extends BaseController
     )]
     #[OA\Response(
         response: 404,
-        description: 'News Not Found'
+        description: 'News Not Found',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'title', type: 'string', example: 'Not Found'),
+                new OA\Property(property: 'status', type: 'int', example: 404),
+                new OA\Property(property: 'detail', type: 'string', example: 'News with id 123e4567-e89b-12d3-a456-426655440000 not found')
+            ]
+        )
     )]
     public function __invoke(
         string $id

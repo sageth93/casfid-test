@@ -15,25 +15,42 @@ use Symfony\Component\Routing\Attribute\Route;
 class UpdateFeedController extends BaseController
 {
     #[Route('/feeds/{id}', name: 'update_feed', methods: ['PUT'])]
+    #[OA\Parameter(
+        name: "id",
+        description: "ID of the news to update",
+        in: "path",
+        required: true,
+        schema: new OA\Schema(type: "string", format: "uuid", example: "123e4567-e89b-12d3-a456-426655440000")
+    )]
     #[OA\Response(
         response: 204,
         description: 'News Updated',
-    )]
-    #[OA\Response(
-        response: 304,
-        description: 'Resource Not Modified',
-    )]
-    #[OA\Response(
-        response: 400,
-        description: 'Bad Request',
-    )]
-    #[OA\Response(
-        response: 404,
-        description: 'News Not Found',
+        content: new OA\JsonContent(
+            example: null,
+            nullable: true
+        )
     )]
     #[OA\Response(
         response: 422,
-        description: 'Validation Error',
+        description: 'Unprocessable Content',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'title', type: 'string', example: 'Unprocessable Content'),
+                new OA\Property(property: 'status', type: 'int', example: 422),
+                new OA\Property(property: 'detail', type: 'string', example: 'Title is required')
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 409,
+        description: 'News already exists',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'title', type: 'string', example: 'Conflict'),
+                new OA\Property(property: 'status', type: 'int', example: 409),
+                new OA\Property(property: 'detail', type: 'string', example: 'News with id 123e4567-e89b-12d3-a456-426655440000 already exists')
+            ]
+        )
     )]
     public function __invoke(
         string $id,
